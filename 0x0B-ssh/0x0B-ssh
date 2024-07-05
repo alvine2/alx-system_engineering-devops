@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Variables
+USER="ubuntu"  # Replace with the username on your server
+PUBLIC_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQD310umebX4yXOxEBhmvzCWAnnfM7Cr6Z7yspukfvk1zSVkp04LTqynQGbG51g5vZnrvsEKjcrFE9K+gWRnSw1VCXXRvqagcpiIFx7H8NrFhKJGgFABMfhGQZhiltyaz33MGt8d3+9ZxT6RkBxRsqknr0ajvK//HEL4UfBh3/FaBpOfFAAb9lNE9TcjDnoBJo30eqF0/vbsgaxZfJnt+f8ndT99jOPb5VNi7NFGq+wTIAOG7+jXXxxsaNnsYXAZjpPMc3Vig5OKyuFBc7DZG4Xt3qVz5GHj+apELW1DHMcSM8xM08TDRg0t2wlmOQy0PdYSCuqk3Ij2QAv3aT48FRs8bEEXARmPZXBk7ywpncBOHN5PVOrKwvVkz0Qdl2l4UzAaMl6o5nAeylwpf6H5d50dz35ovYfMVeyaFpr5rgs2HOp1WARNTGs91Ec071MOZ9NbTbkgDNatUy94FOGkalOk2QhI1IefVNyGYoGzFDDJYguHt3U7Vyn6TPOl2dmL7bHY/1/OO8HzeWG+gZmIvfYHpKXvY6D/5SXBQ+NaIW/CdXnfrkLcjh2mOJeZJMQcwqDRjxwM+4FghSWoaRJhx+OOHFjCWemPOlG5e9k/8FhonvlTH3Tmlf5Gul3FQlxm11iVbBZXUbGsQoYFpuBPeopYb927MWU8DZEgFkwIfPjsBQ"  # Replace with the SSH public key
+
+# Ensure .ssh directory exists
+sudo mkdir -p /home/${USER}/.ssh
+sudo chmod 700 /home/${USER}/.ssh
+
+# Add public key to authorized_keys file
+echo "${PUBLIC_KEY}" | sudo tee -a /home/${USER}/.ssh/authorized_keys >/dev/null
+
+# Secure permissions
+sudo chmod 600 /home/${USER}/.ssh/authorized_keys
+sudo chown -R ${USER}:${USER} /home/${USER}/.ssh
+
+# Restart SSH service (optional)
+sudo systemctl restart ssh
