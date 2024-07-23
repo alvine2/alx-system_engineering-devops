@@ -32,14 +32,14 @@ defaults
   timeout server 15s
   timeout http-request 10s
 
-frontend alvine-tech-frontend
+frontend clickviral-tech-frontend
     bind *:80
-    default_backend alvine-tech-backend
+    default_backend clickviral-tech-backend
 
-backend alvine-tech-backend
+backend clickviral-tech-backend
     balance roundrobin
-   server 106021-web-01 107.23.64.176 check
-  server 106021-web-02 100.25.211.210 check
+    server 106021-web-01 100.26.218.63:80 check
+    server 106021-web-02 52.91.127.224:80 check
 "
 
 # shellcheck disable=SC2154
