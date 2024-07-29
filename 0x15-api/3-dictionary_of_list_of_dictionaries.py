@@ -14,7 +14,10 @@ if __name__ == '__main__':
     for user in users:
         user_id = user.get('id')
         username = user.get('username')
-        todos_url = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(user_id)
+        todos_url = (
+            'https://jsonplaceholder.typicode.com/users/{}/todos'
+            .format(user_id)
+        )
 
         resp = requests.get(todos_url)
         tasks = resp.json()
@@ -30,5 +33,5 @@ if __name__ == '__main__':
             })
 
     with open('todo_all_employees.json', 'w') as f:
-        json.dump(users_dict, f, indent=4)  # Added indent for better readability
+        json.dump(users_dict, f, indent=4)
 
